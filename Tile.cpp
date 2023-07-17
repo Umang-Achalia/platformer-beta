@@ -11,6 +11,8 @@ void Tile::drawTile(int x, int y) {
 	SDL_RenderFillRect(gRenderer, &tile);
 }
 
+// For now check only vertical collision, once you grasp the concept try right/left collision.
+// start with single tile collision then move to full map/level.
 bool Tile::isColliding(SDL_Rect* player) {
 	int right, right2;
 	int left, left2;
@@ -27,12 +29,24 @@ bool Tile::isColliding(SDL_Rect* player) {
 	top2 = player->y;
 	bottom2 = player->y + player->h;
 
-	/*if (SDL_HasIntersection(&tile, player)) {
+	/*
+	// 1st approach
+	if (SDL_HasIntersection(&tile, player)) {
 		return true;
 	}
-	return false;*/
+	return false;
 
-	if (bottom2 <= top || top2 >= bottom || right2 <= left || left >= right) {
+	// 2nd approach
+	if(bottom2 == top){
+	    return true;
+	}
+	else{
+	    return else;
+	}
+	*/
+
+	// 3rd approach
+	if (bottom2 <= top || top2 >= bottom || right2 <= left || left2 >= right) {
 		return false;
 	}
 	return true;
