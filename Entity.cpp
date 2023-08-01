@@ -21,15 +21,15 @@ void Entity::drawTexture(int x, int y) {
 	dest.w = src.w * 3;
 	dest.h = src.h * 3;
 
-	vertical_detector.x = dest.x + 9;
+	vertical_detector.x = dest.x + 12;
 	vertical_detector.y = dest.y - 3;
-	vertical_detector.w = 30;
+	vertical_detector.w = 21;
 	vertical_detector.h = 54;
 
 	horizontal_detector.x = dest.x;
 	horizontal_detector.y = dest.y + 9;
 	horizontal_detector.w = 45;
-	horizontal_detector.h = 15;
+	horizontal_detector.h = 18;
 
 	SDL_RenderCopy(gRenderer, texture, &src, &dest);
 }

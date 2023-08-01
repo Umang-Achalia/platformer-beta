@@ -11,6 +11,7 @@ Tile::Tile(int x, int y) {
 }
 
 void Tile::drawTile() {
+	tile.x += shift_tile;
 	SDL_SetRenderDrawColor(gRenderer, 60, 82, 145, 1);
 	SDL_RenderDrawRect(gRenderer, &tile);
 	SDL_RenderFillRect(gRenderer, &tile);

@@ -10,6 +10,7 @@ SDL_Window* gWindow = nullptr;
 SDL_Renderer* gRenderer = nullptr;
 
 int stay_on_floor = 1;
+float shift_tile = 0;
 
 // HORIZONTAL
 float speedX = 2.0f;
@@ -20,7 +21,7 @@ float maxX = 25.5f;
 // VERTICAL
 float speedY = 0.0f;
 float gravity = 2.2f;
-float jumpStr = 16.2f;
+float jumpStr = 14.2f;
 
 // flags
 int up = 0;
@@ -93,7 +94,7 @@ void Game::handleEvent() {
 void Game::update() {
 
 	if (SDL_GetKeyboardState(0)[SDL_GetScancodeFromKey(SDLK_d)]) {
-		rt_accel += 0.5;
+		rt_accel += 0.4;
 		if (rt_accel >= maxX) { rt_accel = maxX; }
 	}
 	else {
@@ -101,12 +102,24 @@ void Game::update() {
 	}
 
 	if (SDL_GetKeyboardState(0)[SDL_GetScancodeFromKey(SDLK_a)]) {
-		lt_accel += 0.5;
+		lt_accel += 0.4;
 		if (lt_accel <= -maxX) { lt_accel = -maxX; }
 	}
 	else {
 		lt_accel = 0;
 	}
+
+	/*
+	if (player->getRect()->x >= 600) {
+		player->getRect()->x = 600;
+		shift_tile = - rt_accel;
+	}
+
+	if (player->getRect()->x <= 300) {
+		player->getRect()->x = 300;
+		shift_tile = lt_accel;
+	}
+	*/
 
 	for(int count = 0; count < group_of_tiles.size(); count++) {
 
@@ -162,7 +175,7 @@ void Game::render() {
 	}
 
 	// ------------------------------------------
-	SDL_SetRenderDrawColor(gRenderer, 31, 32, 34, 1);
+	SDL_SetRenderDrawColor(gRenderer, 900, 900, 900, 1);
 	SDL_RenderPresent(gRenderer);
 }
 
