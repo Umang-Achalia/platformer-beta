@@ -1,7 +1,7 @@
 #include "Game.h"
 
-const int SCREEN_WIDTH = 700;
-const int SCREEN_HEIGHT = 400;
+const int SCREEN_WIDTH = 900;
+const int SCREEN_HEIGHT = 500;
 
 Game* game = nullptr;
 
@@ -12,7 +12,7 @@ int main(int num_args, char* argv[]) {
 	int start_loop, delta;
 
 	game = new Game();
-	game->init("SDL EXP", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	game->init("DINO DASH", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	while (game->running()) {
 		start_loop = SDL_GetTicks();
 

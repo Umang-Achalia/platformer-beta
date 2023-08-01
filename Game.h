@@ -1,13 +1,6 @@
 #pragma once
 
 #include <SDL.h>
-#include <iostream>
-#include "Entity.h"
-#include "Tile.h"
-using namespace std;
-
-extern SDL_Window* gWindow;
-extern SDL_Renderer* gRenderer;
 
 class Game {
 private:
