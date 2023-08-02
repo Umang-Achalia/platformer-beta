@@ -16,7 +16,7 @@ float shift_tile = 0;
 float speedX = 2.0f;
 float lt_accel = 0;
 float rt_accel = 0;
-float maxX = 25.5f;
+float maxX = 20.5f;
 
 // VERTICAL
 float speedY = 0.0f;
@@ -136,7 +136,11 @@ void Game::update() {
 				up = 0;
 				speedY += intersect.h; // ~ player is pushed out corresponding to how far within the tile he goes
 			}
-		}
+			break;
+		} 
+	}
+
+	for (int count = 0; count < group_of_tiles.size(); count++) {
 
 		if (SDL_IntersectRect(group_of_tiles[count]->getTile(), player->getHorizontal(), &intersect)) {
 
