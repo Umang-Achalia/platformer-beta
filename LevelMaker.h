@@ -5,5 +5,5 @@
 class LevelMaker {
 
 public:
-	void make_level(const char*[]);
+	void make_level(const char*[], const char*, const char*, const char*, const char*, const char*, const char*, const char*, const char*, const char*, const char*, const char*, const char*, const char*, const char*);
 };

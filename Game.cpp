@@ -31,7 +31,6 @@ Entity* player = nullptr;
 LevelMaker* level1 = nullptr;
 SDL_Rect intersect{};
 vector<Tile*> group_of_tiles{};
-SDL_Rect sink = {NULL, NULL, 27, 27};
 
 void Game::init(const char* title ,int x, int y, int w, int h, int flags) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
@@ -57,7 +56,7 @@ void Game::init(const char* title ,int x, int y, int w, int h, int flags) {
 	player->loadTexture("assets/tard_00.png");
 
 	level1 = new LevelMaker;
-	level1->make_level(tile_map);
+	level1->make_level(tile_map, "assets/floating.png", "assets/mudUp1.png", "assets/top1.png", "assets/top2.png", "assets/top3.png", "assets/middle1.png", "assets/middle2.png", "assets/middle3.png", "assets/bottom1.png", "assets/bottom2.png", "assets/bottom3.png", "assets/grassUp1.png", "assets/mudDown1.png", "assets/grassUp2.png" );
 }
 
 void Game::handleEvent() {
@@ -110,6 +109,7 @@ void Game::update() {
 	}
 
 	/*
+	*/
 	if (player->getRect()->x >= 600) {
 		player->getRect()->x = 600;
 		shift_tile = - rt_accel;
@@ -119,10 +119,9 @@ void Game::update() {
 		player->getRect()->x = 300;
 		shift_tile = lt_accel;
 	}
-	*/
 
 	for(int count = 0; count < group_of_tiles.size(); count++) {
-
+		// check for collision btwn tiles and player's vertical detector
 		if (SDL_IntersectRect(group_of_tiles[count]->getTile(), player->getVertical(), &intersect)) { 
 
 			if (intersect.y == group_of_tiles[count]->getTile()->y) {
@@ -141,7 +140,7 @@ void Game::update() {
 	}
 
 	for (int count = 0; count < group_of_tiles.size(); count++) {
-
+		// check for collision btwn tiles and player's horizontal detector
 		if (SDL_IntersectRect(group_of_tiles[count]->getTile(), player->getHorizontal(), &intersect)) {
 
 			if (intersect.x == group_of_tiles[count]->getTile()->x) {
@@ -179,7 +178,7 @@ void Game::render() {
 	}
 
 	// ------------------------------------------
-	SDL_SetRenderDrawColor(gRenderer, 900, 900, 900, 1);
+	SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 1);
 	SDL_RenderPresent(gRenderer);
 }
 

@@ -24,7 +24,7 @@ void Entity::drawTexture(int x, int y) {
 	vertical_detector.x = dest.x + 9;
 	vertical_detector.y = dest.y - 3;
 	vertical_detector.w = 27;
-	vertical_detector.h = 54;
+	vertical_detector.h = 57;
 
 	horizontal_detector.x = dest.x;
 	horizontal_detector.y = dest.y + 9;
