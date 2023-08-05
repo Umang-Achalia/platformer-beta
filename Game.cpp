@@ -53,10 +53,10 @@ void Game::init(const char* title ,int x, int y, int w, int h, int flags) {
 		isRunning = false;
 	}
 	player = new Entity;
-	player->loadTexture("assets/tard_00.png");
+	player->loadTexture("assets/hobbit.png");
 
 	level1 = new LevelMaker;
-	level1->make_level(tile_map, "assets/floating.png", "assets/mudUp1.png", "assets/top1.png", "assets/top2.png", "assets/top3.png", "assets/middle1.png", "assets/middle2.png", "assets/middle3.png", "assets/bottom1.png", "assets/bottom2.png", "assets/bottom3.png", "assets/grassUp1.png", "assets/mudDown1.png", "assets/grassUp2.png" );
+	level1->make_level(tile_map, "assets/floating.png", "assets/extensions/mudUp1.png", "assets/top_grass/top1.png", "assets/top_grass/top2.png", "assets/top_grass/top3.png", "assets/mid_grass/middle1.png", "assets/mid_grass/middle2.png", "assets/mid_grass/middle3.png", "assets/bot_grass/bottom1.png", "assets/bot_grass/bottom2.png", "assets/bot_grass/bottom3.png", "assets/extensions/grassUp1.png", "assets/extensions/mudDown1.png", "assets/extensions/grassUp2.png" );
 }
 
 void Game::handleEvent() {
@@ -109,7 +109,6 @@ void Game::update() {
 	}
 
 	/*
-	*/
 	if (player->getRect()->x >= 600) {
 		player->getRect()->x = 600;
 		shift_tile = - rt_accel;
@@ -119,6 +118,7 @@ void Game::update() {
 		player->getRect()->x = 300;
 		shift_tile = lt_accel;
 	}
+	*/
 
 	for(int count = 0; count < group_of_tiles.size(); count++) {
 		// check for collision btwn tiles and player's vertical detector

@@ -9,8 +9,8 @@ void Entity::loadTexture(const char* path){
 void Entity::drawTexture(int x, int y) {
 	src.x = 0;
 	src.y = 0;
-	src.w = 15;
-	src.h = 17;
+	src.w = 18;
+	src.h = 16;
 
 	dest.x = x;
 	dest.x += speedX;
@@ -21,14 +21,14 @@ void Entity::drawTexture(int x, int y) {
 	dest.w = src.w * 3;
 	dest.h = src.h * 3;
 
-	vertical_detector.x = dest.x + 9;
+	vertical_detector.x = dest.x + 24;
 	vertical_detector.y = dest.y - 3;
-	vertical_detector.w = 27;
-	vertical_detector.h = 57;
+	vertical_detector.w = 24;
+	vertical_detector.h = 54;
 
 	horizontal_detector.x = dest.x;
 	horizontal_detector.y = dest.y + 9;
-	horizontal_detector.w = 45;
+	horizontal_detector.w = 51;
 	horizontal_detector.h = 18;
 
 	SDL_RenderCopy(gRenderer, texture, &src, &dest);
