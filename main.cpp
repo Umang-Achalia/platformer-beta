@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "ExternDecl.h"
 
 const int SCREEN_WIDTH = 950;
 const int SCREEN_HEIGHT = 550;

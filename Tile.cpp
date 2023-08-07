@@ -12,6 +12,7 @@ Tile::Tile(int x, int y, const char* path) {
 	src.h = 16;
 
 	tile.x = x;
+	tile.x -= shift_tile;
 	tile.y = y;
 	tile.w = src.w * 3.125;
 	tile.h = src.h * 3.125;
@@ -19,9 +20,5 @@ Tile::Tile(int x, int y, const char* path) {
 }
 
 void Tile::drawTile() {
-	tile.x += shift_tile;
 	SDL_RenderCopy(gRenderer, texture, &src, &tile);
-	//SDL_SetRenderDrawColor(gRenderer, 60, 82, 145, 1);
-	//SDL_RenderDrawRect(gRenderer, &tile);
-	//SDL_RenderFillRect(gRenderer, &tile);
 }
