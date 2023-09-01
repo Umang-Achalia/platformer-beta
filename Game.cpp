@@ -3,7 +3,6 @@
 #include "Entity.h"
 #include "LevelMaker.h"
 #include "TileMap.h"
-#include "Camera.h"
 #include <iostream>
 using namespace std;
 
@@ -11,7 +10,6 @@ SDL_Window* gWindow = nullptr;
 SDL_Renderer* gRenderer = nullptr;
 
 int stay_on_floor = 1;
-float shift_tile = 0;
 
 // HORIZONTAL
 float speedX = 2.0f;
@@ -30,11 +28,13 @@ int collision = 1;
 
 Entity* player = nullptr;
 LevelMaker* level1 = nullptr;
-Camera* hd = nullptr;
 SDL_Rect intersect{};
 vector<Tile*> group_of_tiles{};
 
+Camera* cam = nullptr;
+
 void Game::init(const char* title ,int x, int y, int w, int h, int flags) {
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
 
 		// create window
@@ -60,7 +60,7 @@ void Game::init(const char* title ,int x, int y, int w, int h, int flags) {
 	level1 = new LevelMaker;
 	level1->make_level(tile_map, "assets/floating.png", "assets/extensions/mudUp1.png", "assets/top_grass/top1.png", "assets/top_grass/top2.png", "assets/top_grass/top3.png", "assets/mid_grass/middle1.png", "assets/mid_grass/middle2.png", "assets/mid_grass/middle3.png", "assets/bot_grass/bottom1.png", "assets/bot_grass/bottom2.png", "assets/bot_grass/bottom3.png", "assets/extensions/grassUp1.png", "assets/extensions/mudDown1.png", "assets/extensions/grassUp2.png" );
 
-	hd = new Camera;
+	cam = new Camera;
 }
 
 void Game::handleEvent() {
@@ -79,6 +79,7 @@ void Game::handleEvent() {
 }
 
 void Game::update() {
+	cam->setPos(player->getRect()->x - (950 / 2), player->getRect()->y - (550 / 2));
 
 	if (SDL_GetKeyboardState(0)[SDL_GetScancodeFromKey(SDLK_d)]) {
 		rt_accel += 0.4;
@@ -104,28 +105,6 @@ void Game::update() {
 		up = 0;
 	}
 
-	// Camera
-	hd->getViewbox()->x = (player->getRect()->x + (player->getRect()->w / 2)) - (950 / 2);
-	hd->getViewbox()->y = (player->getRect()->y + (player->getRect()->h / 2)) - (550 / 2);
-
-	if (hd->getViewbox()->x < 0) {
-		hd->getViewbox()->x = 0;
-	}
-
-	if (hd->getViewbox()->y < 0) {
-		hd->getViewbox()->y = 0;
-	}
-
-	if (hd->getViewbox()->x > 950 - hd->getViewbox()->w) {
-		hd->getViewbox()->x = 950 - hd->getViewbox()->w;
-	}
-
-	if (hd->getViewbox()->y > 550 - hd->getViewbox()->h) {
-		hd->getViewbox()->y = 550 - hd->getViewbox()->h;
-	}
-
-	shift_tile = (player->getRect()->x + (player->getRect()->w / 2)) - (950 / 2);
-
 	for(int count = 0; count < group_of_tiles.size(); count++) {
 		// check for collision btwn tiles and player's vertical detector
 		if (SDL_IntersectRect(group_of_tiles[count]->getTile(), player->getVertical(), &intersect)) { 
@@ -138,7 +117,7 @@ void Game::update() {
 
 			if (intersect.y > group_of_tiles[count]->getTile()->y + stay_on_floor) {
 		        gravity *= 0.5;
-				up = 0; // stops player from going up any further so, pushing the player out is unnecessary.
+				up = 0; // stops player from going up any further so, pushing the player down is unnecessary.
 			}
 			break;
 		} 
@@ -177,12 +156,10 @@ void Game::render() {
 	// ------------------------------------------
 	
 	player->drawTexture(350, 50);
-
+    
 	for (int count = 0; count < group_of_tiles.size(); count++) {
 		group_of_tiles[count]->drawTile();
 	}
-
-	hd->drawView();
 
 	// ------------------------------------------
 	SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 1);
@@ -190,7 +167,6 @@ void Game::render() {
 }
 
 void Game::clean() {
-	delete player;
 	SDL_DestroyWindow(gWindow);
 	SDL_DestroyRenderer(gRenderer);
 	SDL_Quit();

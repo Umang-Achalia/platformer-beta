@@ -4,10 +4,9 @@
 
 class Camera {
 private:
-	SDL_Rect view;
-
+	float x, y;
 public:
-	Camera();
-	SDL_Rect* getViewbox() { return &view; }
-	void drawView();
+	void setPos(float xP, float yP) { x = xP, y = yP; }
+	float getX() { return x; }
+	float getY() { return y; }
 };

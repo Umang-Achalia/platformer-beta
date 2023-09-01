@@ -7,24 +7,24 @@ const int SCREEN_HEIGHT = 550;
 Game* game = nullptr;
 
 const int FPS = 60;
-int desired_delta = 1000 / FPS;
+int delta = 1000 / FPS;
 
 int main(int num_args, char* argv[]) {
-	int start_loop, delta;
+	int startLoop, frameTime;
 
 	game = new Game();
 	game->init("DINO DASH", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	while (game->running()) {
-		start_loop = SDL_GetTicks();
+		startLoop = SDL_GetTicks();
 
 		game->handleEvent();
 		game->render();
 		game->update();
 
-		delta = SDL_GetTicks() - start_loop;
+		frameTime = SDL_GetTicks() - startLoop;
 
-		if (delta < desired_delta) {
-			SDL_Delay(desired_delta - delta);
+		if (frameTime < delta) {
+			SDL_Delay(delta - frameTime);
 		}
 	}
 	game->clean();
