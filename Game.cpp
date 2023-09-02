@@ -161,6 +161,8 @@ void Game::render() {
 		group_of_tiles[count]->drawTile();
 	}
 
+	//cam->drawCam();
+
 	// ------------------------------------------
 	SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 1);
 	SDL_RenderPresent(gRenderer);

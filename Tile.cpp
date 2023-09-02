@@ -19,7 +19,6 @@ Tile::Tile(int x, int y, const char* path) {
 }
 
 void Tile::drawTile() {
-	tile.x -= cam->getX();
-	tile.y -= cam->getY();
-	SDL_RenderCopy(gRenderer, texture, &src, &tile);
+	const SDL_Rect tileRect = { tile.x - (int)cam->getRect()->x, tile.y - (int)cam->getRect()->y, tile.w, tile.h };
+	SDL_RenderCopy(gRenderer, texture, &src, &tileRect);
 }
